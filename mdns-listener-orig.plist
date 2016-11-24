@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Label</key>
+	<string>mdns-listener</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>_HOMEDIR_/.nvm/versions/node/v6.5.0/bin/node</string>
+		<string>_HOMEDIR_/develop/github/mdns-listener/mdns-listener.js</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StandardErrorPath</key>
+	<string>/tmp/mdns-listener-error.log</string>
+	<key>StandardOutPath</key>
+	<string>/tmp/mdns-listener.log</string>
+	<key>WatchPaths</key>
+  <array>
+    <string>_HOMEDIR_/.mdns-hosts</string>
+		<string>_HOMEDIR_/develop/github/mdns-listener/mdns-listener.js</string>
+  </array>
+</dict>
+</plist>

@@ -1,0 +1,29 @@
+{
+  "name": "mdns-listener",
+  "version": "1.0.0",
+  "description": "mDNS listener, add as many .local hostnames to your computer as you like.",
+  "author": "Richard",
+  "license": "MIT",
+  "dependencies": {
+    "multicast-dns": "^6.1.0"
+  },
+  "bin" : {
+    "mdns-listener" : "mdns-listener.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Richie765/mdns-listener.git"
+  },
+  "keywords": [
+    "mDNS",
+    "Binjour",
+    ".local",
+    "DNS",
+    "Listener",
+    "Multicase DNS"
+  ],
+  "bugs": {
+    "url": "https://github.com/Richie765/mdns-listener/issues"
+  },
+  "homepage": "https://github.com/Richie765/mdns-listener#readme"
+}

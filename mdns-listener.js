@@ -8,15 +8,15 @@ var fs = require('fs');
 // Config
 
 var mdns_hosts = process.env.HOME + "/.mdns-hosts";
-let interval = 60;
+var interval = 60;
 
 // Get hostnames
 
-let hosts = fs.readFileSync(mdns_hosts, { encoding: 'utf-8' });
+var hosts = fs.readFileSync(mdns_hosts, { encoding: 'utf-8' });
 
 // console.log(hosts);
 
-let hostnames = hosts.split("\n")
+var hostnames = hosts.split("\n")
   .map(name => name.replace(/\#.*/, '')) // Remove comments
   .map(name => name.trim()) // Trim lines
   .filter(name => name.length > 0);  // Remove empty lines
@@ -25,10 +25,10 @@ console.log("Serving hostnames:", hostnames.join(', '));
 
 // Get our ip
 
-let ip;
+var ip;
 
 function getMyIp() {
-  let hostname = os.hostname();
+  var hostname = os.hostname();
 
   dns.lookup(hostname, (err, addr, fam) => {
     if(ip !== addr) {
@@ -50,7 +50,7 @@ mdns.on('query', function(query) {
   // console.log('got a query packet:', query)
 
   if (query.questions[0] && query.questions[0].type === 'A') {
-    let name = query.questions[0].name;
+    var name = query.questions[0].name;
 
     if(hostnames.indexOf(name) >= 0) {
       console.log(name, ' => ', ip);

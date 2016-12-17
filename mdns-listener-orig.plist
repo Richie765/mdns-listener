@@ -8,7 +8,7 @@
 	<string>mdns-listener</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>_HOMEDIR_/.nvm/versions/node/v6.5.0/bin/node</string>
+		<string>_NODEDIR_/node</string>
 		<string>_HOMEDIR_/develop/github/mdns-listener/mdns-listener.js</string>
 	</array>
 	<key>RunAtLoad</key>

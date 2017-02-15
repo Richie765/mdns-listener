@@ -8,6 +8,7 @@ Simple mDNS Listener to add .local hostnames to your machine
 ```
 git clone https://github.com/Richie765/mdns-listener
 cd mdns-listener
+npm install
 cp mdns-listener-orig.plist mdns-listener.plist
 
 # edit mdns-listener.plist to match the paths on your system

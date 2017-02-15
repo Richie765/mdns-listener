@@ -1,14 +1,21 @@
 # mDNS Listener
+
 Simple mDNS Listener to add .local hostnames to your machine
 
+
 # Installation
+
 ```
 git clone https://github.com/Richie765/mdns-listener
 cd mdns-listener
 cp mdns-listener-orig.plist mdns-listener.plist
+
 # edit mdns-listener.plist to match the paths on your system
+
 cp mdns-listener.plist ~/Library/LaunchAgents/
+
 # Put the hostnames in ~/.mdns-hosts as described below
+
 launchctl load ~/Library/LaunchAgents/mdns-listener.plist
 ```
 
@@ -20,9 +27,10 @@ myhost1.local
 myhost2.local
 ```
 
-The listener should restart automatically whenever this file is changed.
+Whenever you change this file, you should restart the service.
 
-# Running
+
+# Running manually
 
 Just run
 ```bash
@@ -33,7 +41,9 @@ Logfiles are available in
 * /tmp/mdns-listener-error.log
 * /tmp/mdns-listener.log
 
+
 # Package formats
+
 Some notes that may be useful when changing the script.
 
 QUERY from macOS

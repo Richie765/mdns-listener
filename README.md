@@ -2,23 +2,8 @@
 
 Simple mDNS Listener to add .local hostnames to your machine
 
+This script is tested on macOS.
 
-# Installation
-
-```
-git clone https://github.com/Richie765/mdns-listener
-cd mdns-listener
-npm install
-cp mdns-listener-orig.plist mdns-listener.plist
-
-# edit mdns-listener.plist to match the paths on your system
-
-cp mdns-listener.plist ~/Library/LaunchAgents/
-
-# Put the hostnames in ~/.mdns-hosts as described below
-
-launchctl load ~/Library/LaunchAgents/mdns-listener.plist
-```
 
 # Configuration
 Create a file named `~/.mdns-hosts`, place hostnames ending with `.local` on separate lines like so:
@@ -31,11 +16,33 @@ myhost2.local
 Whenever you change this file, you should restart the service.
 
 
+# Installation
+
+```bash
+git clone https://github.com/Richie765/mdns-listener
+cd mdns-listener
+npm install
+```
+
+
 # Running manually
 
 Just run
 ```bash
 node mdns-listener.js
+```
+
+
+# Autmatic startup on login (macOS)
+
+```bash
+cp mdns-listener.plist-sample mdns-listener.plist
+
+# edit mdns-listener.plist to match the paths on your system
+
+cp mdns-listener.plist ~/Library/LaunchAgents/
+
+launchctl load ~/Library/LaunchAgents/mdns-listener.plist
 ```
 
 Logfiles are available in

@@ -54,7 +54,7 @@ mdns.on('query', function(query) {
 
     if(hostnames.indexOf(name) >= 0) {
       console.log(name, ' => ', ip);
-      mdns.respond([{ name: name, type:'A', data: ip, ttl: 120 }]);
+      mdns.respond([{ name: name, type:'A', data: ip, ttl: 120 }]); // Seconds
     }
   }
 })

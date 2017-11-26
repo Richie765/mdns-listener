@@ -10,6 +10,10 @@ const fs = require('fs');
 const mdns_hosts = process.env.HOME + "/.mdns-hosts";
 const interval = 60;
 
+// Set process name
+
+process.title = process.title = 'mdns-listener';
+
 // Get hostnames
 
 const hosts = fs.readFileSync(mdns_hosts, { encoding: 'utf-8' });

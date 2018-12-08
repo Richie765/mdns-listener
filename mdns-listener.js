@@ -16,18 +16,17 @@ const mdns_hosts = os.platform() === 'win32'
 process.title = process.title = 'mdns-listener';
 
 
-// Get hostnames
+// Get hostnames to serve
 
 const hosts = fs.readFileSync(mdns_hosts, { encoding: 'utf-8' });
-
 // console.log(hosts);
 
-const hostnames = hosts.split("\n")
+const hostnames = hosts.split('\n')
   .map(name => name.replace(/\#.*/, '')) // Remove comments
   .map(name => name.trim()) // Trim lines
   .filter(name => name.length > 0);  // Remove empty lines
 
-console.log("Serving hostnames:", hostnames.join(', '));
+console.log('Serving hostnames:', hostnames.join(', '));
 
 
 // Get our hostname
@@ -61,21 +60,3 @@ mdns.on('query', function(query) {
   }
 
 });
-
-mdns.respond([{ name: 'nena.local', type:'CNAME', data: hostname, ttl: 120 }]); // Seconds
-
-
-// Testing
-
-
-// mdns.on('response', function(response) {
-//   console.log('got a response packet:', response)
-// })
-
-// lets query for an A record
-// mdns.query({
-//   questions:[{
-//     name: 'myhost.local',
-//     type: 'A'
-//   }]
-// })

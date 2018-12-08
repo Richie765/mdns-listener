@@ -1,18 +1,18 @@
 #!/usr/bin/env node --use_strict
 
 const mdns = require('multicast-dns')()
-const dns = require('dns');
 const os = require('os');
 const fs = require('fs');
 
 // Config
 
 const mdns_hosts = process.env.HOME + "/.mdns-hosts";
-const interval = 60;
+
 
 // Set process name
 
 process.title = process.title = 'mdns-listener';
+
 
 // Get hostnames
 
@@ -27,29 +27,23 @@ const hostnames = hosts.split("\n")
 
 console.log("Serving hostnames:", hostnames.join(', '));
 
-// Get our ip
 
-var ip;
+// Get our hostname
 
-function getMyIp() {
-  const hostname = os.hostname();
+let hostname = os.hostname();
 
-  dns.lookup(hostname, (err, addr, fam) => {
-    if(ip !== addr) {
-      console.log('addr: ', addr);
-      ip = addr;
-    }
-  });
+if(hostname.indexOf('.') >= 0) {
+  hostname = hostname.split('.')[0];
 }
+hostname += '.local';
 
-getMyIp();
+console.log('hostname:', hostname);
 
-setInterval(getMyIp, interval * 1000);
 
 // Wait and respond to queries
 
 mdns.on('query', function(query) {
-  // console.log('got a query packet:', query)
+  // console.log('query:', query);
 
   const questions = query.questions;
 
@@ -58,13 +52,16 @@ mdns.on('query', function(query) {
       const { name, type } = question;
 
       if(type === 'A' && hostnames.indexOf(name) >= 0) {
-        console.log(name, ' => ', ip);
-        mdns.respond([{ name: name, type:'A', data: ip, ttl: 120 }]); // Seconds
+        console.log(name, ' => ', hostname, ' [CNAME]');
+        mdns.respond([{ name: name, type:'CNAME', data: hostname, ttl: 120 }]); // Seconds
       }
     });
   }
 
-})
+});
+
+mdns.respond([{ name: 'nena.local', type:'CNAME', data: hostname, ttl: 120 }]); // Seconds
+
 
 // Testing
 

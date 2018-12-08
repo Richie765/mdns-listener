@@ -6,7 +6,9 @@ const fs = require('fs');
 
 // Config
 
-const mdns_hosts = process.env.HOME + "/.mdns-hosts";
+const mdns_hosts = os.platform() === 'win32'
+  ? 'hosts.mdns'
+  : '/etc/hosts.mdns';
 
 
 // Set process name

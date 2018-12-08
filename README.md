@@ -2,11 +2,11 @@
 
 Simple mDNS Listener to add .local hostnames to your machine
 
-This script is tested on macOS.
+This script is tested on macOS and Linux. It should work on Windows as well.
 
 
 ## Configuration
-Create a file named `~/.mdns-hosts`, place hostnames ending with `.local` on separate lines like so:
+Create a file named `/etc/hosts.mdns`, place hostnames ending with `.local` on separate lines like so:
 
 ```
 myhost1.local
@@ -33,7 +33,7 @@ node mdns-listener.js
 ```
 
 
-## Autmatic startup on login (macOS)
+## Automatic startup on login (macOS)
 
 ```bash
 cp mdns-listener.plist-sample mdns-listener.plist
@@ -50,65 +50,13 @@ Logfiles are available in
 * /tmp/mdns-listener.log
 
 
-## Package formats
+## Version History
+1.0
+* Initial version
 
-Some notes that may be useful when changing the script.
-
-QUERY from macOS
-```javascript
-{ id: 0,
-  type: 'query',
-  flags: 0,
-  questions:
-   [ { name: 'myhost.local', type: 'A', class: 1 },
-     { name: 'myhost.local', type: 'AAAA', class: 1 } ],
-  answers: [],
-  authorities: [],
-  additionals: [] }
-```
-
-RESPONSE from macOS
-```javascript
-{ id: 0,
-  type: 'response',
-  flags: 1024,
-  questions: [],
-  answers:
-   [ { name: 'myhost.local',
-       type: 'AAAA',
-       class: 1,
-       ttl: 120,
-       flush: true,
-       data: 'fe80::xxxx:xxxx:xxxx:xxxx' },
-     { name: 'myhost.local',
-       type: 'A',
-       class: 1,
-       ttl: 120,
-       flush: true,
-       data: '192.168.0.10' } ],
-  authorities: [],
-  additionals:
-   [ { name: 'myhost.local',
-       type: 'NSEC',
-       class: 1,
-       ttl: 120,
-       flush: true,
-       data: <Buffer ....> } ] }
-```
-
-RESPONSE from this script
-```javascript
-{ id: 0,
-  type: 'response',
-  flags: 0,
-  questions: [],
-  answers:
-   [ { name: 'myhost.local',
-       type: 'A',
-       class: 1,
-       ttl: 0,
-       flush: false,
-       data: '192.168.0.10' } ],
-  authorities: [],
-  additionals: [] }
-```
+1.1
+* Fixed bug where certain requests wouldn't be answered (especially if they came from iOS)
+* Respond with CNAME instead of A (works better when you have multiple interfaces)
+* Changed path to hosts file to /etc/hosts.mdns
+* Added Windows compatability (not tested) - will read hosts.mdns from current directory
+* Added monitor.js, used for debugging and testing

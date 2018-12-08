@@ -2,7 +2,7 @@
 
 Simple mDNS Listener to add .local hostnames to your machine
 
-This script is tested on macOS and Linux. It should work on Windows as well.
+This script is tested on Linux and macOS. It should work on Windows as well.
 
 
 ## Configuration
@@ -31,6 +31,20 @@ Just run
 ```bash
 node mdns-listener.js
 ```
+
+## Automatic startup on boot (Linux, systemd)
+```bash
+cp mdns-listener.service-sample mdns-listener.service
+
+# edit mdns-listener.service to mathch the paths on your system
+
+sudo cp mdns-listener.service /etc/systemd/system
+
+systemctl enable mdns-listener
+systemctl start mdns-listener
+journalctl -u mdns-listener.service
+```
+
 
 
 ## Automatic startup on login (macOS)

@@ -74,3 +74,4 @@ Logfiles are available in
 * Changed path to hosts file to /etc/hosts.mdns
 * Added Windows compatability (not tested) - will read hosts.mdns from current directory
 * Added monitor.js, used for debugging and testing
+* Added Linux systemd auto start on boot

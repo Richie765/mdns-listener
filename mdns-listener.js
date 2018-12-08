@@ -51,14 +51,19 @@ setInterval(getMyIp, interval * 1000);
 mdns.on('query', function(query) {
   // console.log('got a query packet:', query)
 
-  if (query.questions[0] && query.questions[0].type === 'A') {
-    const name = query.questions[0].name;
+  const questions = query.questions;
 
-    if(hostnames.indexOf(name) >= 0) {
-      console.log(name, ' => ', ip);
-      mdns.respond([{ name: name, type:'A', data: ip, ttl: 120 }]); // Seconds
-    }
+  if(questions) {
+    questions.forEach(question => {
+      const { name, type } = question;
+
+      if(type === 'A' && hostnames.indexOf(name) >= 0) {
+        console.log(name, ' => ', ip);
+        mdns.respond([{ name: name, type:'A', data: ip, ttl: 120 }]); // Seconds
+      }
+    });
   }
+
 })
 
 // Testing

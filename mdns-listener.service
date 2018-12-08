@@ -1,0 +1,18 @@
+[Unit]
+Description=mdns-listener service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/nodejse /opt/mdns-listener/mdns-listener.js
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=mdns-listener
+#User=<alternate user>
+#Group=<alternate group>
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+
